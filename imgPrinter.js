@@ -82,6 +82,7 @@ addEventListener('DOMContentLoaded', () => {
                 if (width.value == 0) {
                     next.disabled = true;
                     next.style.cursor = 'default';
+                    width.value = '';
                 }
             }
             next.onclick = () => {

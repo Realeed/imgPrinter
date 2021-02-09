@@ -85,9 +85,12 @@ addEventListener('DOMContentLoaded', () => {
                 }
             }
             next.onclick = () => {
-                document.getElementsByTagName('form')[0].innerHTML = ''
+                document.getElementsByTagName('form')[0].innerHTML = '';
+                next.disabled = true;
                 next.style.display = 'none';
                 width.style.display = 'none';
+                img.src = '';
+                document.body.appendChild(img)
                 document.getElementsByTagName('body')[0].style.width = '100%';
                 document.body.appendChild(pass)
                 let print = document.createElement('button');
@@ -100,9 +103,13 @@ addEventListener('DOMContentLoaded', () => {
                 print.style.cursor = 'pointer';
                 print.style.position = 'fixed';
                 document.body.appendChild(print);
+                img.src = URL.createObjectURL(event.target.files[0]);
+                document.body.appendChild(img)
                 print.onclick = () => {
                     print.style.display = 'none'
                     window.print();
+                    img.src = ''
+                    document.body.appendChild(img)
                     let newPrint = document.createElement('button');
                     newPrint.innerHTML = 'Upload a new photo';
                     newPrint.style.fontSize = '35px';
@@ -114,16 +121,20 @@ addEventListener('DOMContentLoaded', () => {
                     newPrint.style.cursor = 'pointer';
                     newPrint.style.position = 'fixed';
                     document.body.appendChild(newPrint)
+                    img.src = URL.createObjectURL(event.target.files[0]);
+                    document.body.appendChild(img)
                     newPrint.onclick = () => {
                         window.location.reload();
                     }
                 }
             }
             onkeypress = (key) => {
-                if (key.code == 'Enter' && next.disabled == false) {
-                    document.getElementsByTagName('form')[0].innerHTML = ''
+                if (key.code == 'Enter' && next.disabled == false && next.style.display != 'none') {
+                    document.getElementsByTagName('form')[0].innerHTML = '';
                     next.style.display = 'none';
                     width.style.display = 'none';
+                    img.src = ''
+                    document.body.appendChild(img)
                     document.getElementsByTagName('body')[0].style.width = '100%';
                     document.body.appendChild(pass)
                     let print = document.createElement('button');
@@ -136,9 +147,13 @@ addEventListener('DOMContentLoaded', () => {
                     print.style.cursor = 'pointer';
                     print.style.position = 'fixed';
                     document.body.appendChild(print);
+                    img.src = URL.createObjectURL(event.target.files[0]);
+                    document.body.appendChild(img);
                     print.onclick = () => {
                         print.style.display = 'none'
                         window.print();
+                        img.src = ''
+                        document.body.appendChild(img)
                         let newPrint = document.createElement('button');
                         newPrint.innerHTML = 'Upload a new photo';
                         newPrint.style.fontSize = '35px';
@@ -150,6 +165,8 @@ addEventListener('DOMContentLoaded', () => {
                         newPrint.style.cursor = 'pointer';
                         newPrint.style.position = 'fixed';
                         document.body.appendChild(newPrint)
+                        img.src = URL.createObjectURL(event.target.files[0]);
+                        document.body.appendChild(img)
                         newPrint.onclick = () => {
                             window.location.reload();
                         }

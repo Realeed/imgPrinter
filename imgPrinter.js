@@ -55,14 +55,10 @@ addEventListener('DOMContentLoaded', () => {
             document.getElementsByTagName('input')[1].disabled = true;
             document.getElementsByTagName('input')[1].style.cursor = 'default';
             width.onchange = () => {
-                let wpix = width.value + 'px'
+                let wpix = width.value + 'px';
+                let hpix = height.value + 'px';
                 img.style.width = wpix;
-                if (width.value == '' && height.value == '') {
-                    img.style.width = '500px';
-                    img.style.height = 'auto';
-                    next.disabled = true;
-                    next.style.cursor = 'default';
-                } else if (width.value == 0) {
+                if (width.value == 0) {
                     width.value = '';
                 } else {
                     next.disabled = false;
@@ -71,6 +67,11 @@ addEventListener('DOMContentLoaded', () => {
                 if (width.value == '' && height.value == '') {
                     img.style.width = '500px';
                     img.style.height = 'auto';
+                    next.disabled = true;
+                    next.style.cursor = 'default'
+                } else if (width.value == '' && height.value != '') {
+                    img.style.height = hpix;
+                    img.style.width = 'auto';
                 }
             }
             width.onkeyup = () => {
@@ -105,17 +106,26 @@ addEventListener('DOMContentLoaded', () => {
                 }
             }
             height.onchange = () => {
-                let hpix = height.value + 'px'
+                let hpix = height.value + 'px';
+                let wpix = width.value + 'px'
                 img.style.height = hpix;
-                if (height.value == '' && width.value == '') {
-                    next.disabled = true;
-                    next.style.cursor = 'default';
-                } else if (height.value == 0 && width.value == '') {
-                    next.disabled = true;
-                    next.style.cursor = 'default';
+                if (height.value == 0) {
+                    height.value = '';
                 } else {
                     next.disabled = false;
                     next.style.cursor = 'pointer';
+                }
+                if (height.value == '' && width.value == '') {
+                    next.disabled = true;
+                    next.style.cursor = 'default';
+                    img.style.width = '500px';
+                    img.style.height = 'auto';
+                } else if (height.value != '' && width.value == '') {
+                    img.style.height = hpix;
+                    img.style.width = 'auto';
+                } else if (height.value == '' && width.value != '') {
+                    img.style.width = wpix;
+                    img.style.height = 'auto';
                 }
             }
             height.onkeyup = () => {

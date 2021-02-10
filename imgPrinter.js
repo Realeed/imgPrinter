@@ -10,7 +10,7 @@ addEventListener('DOMContentLoaded', () => {
             width.placeholder = 'Width in pixels';
             width.type = 'number';
             width.min = '0';
-            width.max = '1000'
+            width.max = '1000';
             width.step = '10';
             width.autofocus = true;
             width.style.marginTop = '50px';
@@ -43,8 +43,8 @@ addEventListener('DOMContentLoaded', () => {
             next.style.position = 'fixed'
             next.style.paddingLeft = '25px';
             next.style.paddingRight = '25px';
+            next.style.cursor = 'pointer';
             document.body.appendChild(next);
-            next.disabled = true;
             let pass = document.createElement('br');
             document.body.appendChild(pass)
             let img = document.createElement('img');
@@ -67,42 +67,30 @@ addEventListener('DOMContentLoaded', () => {
                 if (width.value == '' && height.value == '') {
                     img.style.width = '500px';
                     img.style.height = 'auto';
-                    next.disabled = true;
-                    next.style.cursor = 'default'
                 } else if (width.value == '' && height.value != '') {
                     img.style.height = hpix;
                     img.style.width = 'auto';
                 }
             }
             width.onkeyup = () => {
-                let wpix = width.value + 'px'
+                let wpix = width.value + 'px';
+                let hpix = height.value + 'px';
                 img.style.width = wpix;
-                if (width.value == '' && height.value == '') {
-                    img.style.width = '500px';
-                    img.style.height = 'auto';
-                    next.disabled = true;
-                    next.style.cursor = 'default';
+                if (width.value == 0) {
+                    width.value = '';
                 } else if (width.value > 1000) {
                     alert('Entered value must be less than or equal to 1000!');
-                    width.value = '';
-                    height.value = '';
-                    img.style.width = '500px';
-                    img.style.height = 'auto';
-                    next.disabled = true;
-                    next.style.cursor = 'default';
-                } else if (width.value == 0) {
                     width.value = '';
                 } else {
                     next.disabled = false;
                     next.style.cursor = 'pointer';
                 }
-                if (width.value == '' && height.value != '') {
-                    next.disabled = false;
-                    next.style.cursor = 'pointer';
-                }
                 if (width.value == '' && height.value == '') {
                     img.style.width = '500px';
                     img.style.height = 'auto';
+                } else if (width.value == '' && height.value != '') {
+                    img.style.height = hpix;
+                    img.style.width = 'auto';
                 }
             }
             height.onchange = () => {
@@ -116,8 +104,6 @@ addEventListener('DOMContentLoaded', () => {
                     next.style.cursor = 'pointer';
                 }
                 if (height.value == '' && width.value == '') {
-                    next.disabled = true;
-                    next.style.cursor = 'default';
                     img.style.width = '500px';
                     img.style.height = 'auto';
                 } else if (height.value != '' && width.value == '') {
@@ -129,17 +115,24 @@ addEventListener('DOMContentLoaded', () => {
                 }
             }
             height.onkeyup = () => {
-                let hpix = height.value + 'px'
+                let hpix = height.value + 'px';
+                let wpix = width.value + 'px'
                 img.style.height = hpix;
-                if (height.value == '' && width.value == '') {
-                    next.disabled = true;
-                    next.style.cursor = 'default';
-                } else if (height.value == 0) {
-                    next.style.cursor = 'default';
+                if (height.value == 0) {
                     height.value = '';
                 } else {
                     next.disabled = false;
                     next.style.cursor = 'pointer';
+                }
+                if (height.value == '' && width.value == '') {
+                    img.style.width = '500px';
+                    img.style.height = 'auto';
+                } else if (height.value != '' && width.value == '') {
+                    img.style.height = hpix;
+                    img.style.width = 'auto';
+                } else if (height.value == '' && width.value != '') {
+                    img.style.width = wpix;
+                    img.style.height = 'auto';
                 }
             }
             next.onclick = () => {

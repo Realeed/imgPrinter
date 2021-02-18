@@ -1,4 +1,8 @@
 addEventListener('DOMContentLoaded', () => {
+    let icon = document.createElement('link');
+    icon.rel = 'icon';
+    icon.href = 'icon.jpg';
+    document.head.append(icon);
     document.getElementsByTagName('input')[1].disabled = true;
     document.getElementsByTagName('input')[1].style.cursor = 'default';
     document.getElementById('file').onchange = function loadFile(event) {
